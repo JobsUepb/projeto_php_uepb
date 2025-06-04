@@ -1,0 +1,8 @@
+{
+    "require": {
+        "monolog/monolog": "^3.9",
+        "symfony/dotenv": "^7.3",
+        "league/flysystem": "^3.29",
+        "league/flysystem-local": "^3.29"
+    }
+}

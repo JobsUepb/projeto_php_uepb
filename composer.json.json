@@ -1,0 +1,22 @@
+{
+    "name": "jobso/projeto_php_uepb",
+    "description": "Projeto PHP com Composer",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+     "psr-4": {
+        "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Eu"
+        }
+    ],
+    "require": {
+        "nesbot/carbon": "^3.9",
+        "symfony/dotenv": "^7.3",
+        "monolog/monolog": "^3.9",
+        "league/flysystem": "^3.29"
+    }
+}
