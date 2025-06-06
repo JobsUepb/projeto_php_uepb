@@ -14,6 +14,14 @@ $resultado = $conexao->query($sql);
 ?>
 
 <div class="container mt-5">
+
+     <?php
+    if (isset($_SESSION['mensagem'])) {
+        echo '<div class="alert alert-success text-center">' . $_SESSION['mensagem'] . '</div>';
+        unset($_SESSION['mensagem']);
+    }
+    ?>
+    
     <h2 class="mb-4">Bem-vindo, <?php echo $_SESSION['usuario_nome']; ?>!</h2>
     <p class="lead">Você está logado.</p>
 
