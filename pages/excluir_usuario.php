@@ -1,11 +1,9 @@
 <?php
 
 session_start();
-
 require_once '../includes/conexao.php';
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-
 if (!$id) {
     die("ID inválido.");
 }
@@ -20,3 +18,5 @@ if ($stmt->execute()) {
 } else {
     echo "Erro ao excluir: " . $conexao->error;
 }
+
+?>
