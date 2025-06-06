@@ -1,7 +1,11 @@
 <?php
 require_once '../includes/conexao.php';
 
-$id = $_GET['id'];
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+if (!$id) {
+    die("ID inválido.");
+}
 
 $sql = "DELETE FROM usuarios WHERE id = ?";
 $stmt = $conexao->prepare($sql);
