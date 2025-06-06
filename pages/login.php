@@ -17,13 +17,3 @@
 </div>
 <?php include_once('../includes/footer.php'); ?>
 
-
-<?php
-// Mensagem de erro, se houver (ex: login incorreto)
-if (isset($_GET['erro']) && $_GET['erro'] == '1'): ?>
-    <div class="container mt-3" style="max-width: 500px;">
-        <div class="alert alert-danger text-center">
-            Email ou senha inválidos.
-        </div>
-    </div>
-<?php endif; ?>
