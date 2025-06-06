@@ -1,12 +1,18 @@
 <?php
-require_once __DIR__ . '/../vendor/autoload.php';
 
-use Symfony\Component\Dotenv\Dotenv;
+spl_autoload_register(function ($class) {
+    $prefix = 'App\\';
+    $base_dir = __DIR__ . '/';
 
-$dotenv = new Dotenv();
-$dotenv->loadEnv(__DIR__ . '/../.env');
+    $len = strlen($prefix);
+    if (strncmp($prefix, $class, $len) !== 0) {
+        return; // não é do namespace App\
+    }
 
-// Deixa as variáveis disponíveis via getenv()
-foreach ($_ENV as $key => $value) {
-    putenv("$key=$value");
-}
+    $relative_class = substr($class, $len);
+    $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
+
+    if (file_exists($file)) {
+        require $file;
+    }
+});
