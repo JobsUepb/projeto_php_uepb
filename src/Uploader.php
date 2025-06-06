@@ -2,32 +2,23 @@
 
 namespace App;
 
-use League\Flysystem\Filesystem;
-use League\Flysystem\Local\LocalFilesystemAdapter;
+class Uploader {
+    public function upload($filename, $contents) {
+        $uploadDir = __DIR__ . '/../uploads/';
 
-class Uploader
-{
-    private Filesystem $filesystem;
-
-    public function __construct()
-    {
-        $uploadDir = getenv('UPLOADS_DIR');
-        if (!$uploadDir) {
-            throw new \Exception('UPLOADS_DIR não definido no .env');
+        // Verifica se a pasta existe, senão cria
+        if (!is_dir($uploadDir)) {
+            if (!mkdir($uploadDir, 0777, true) && !is_dir($uploadDir)) {
+                throw new \RuntimeException("Falha ao criar o diretório de upload.");
+            }
         }
 
-        $fullPath = __DIR__ . '/../' . $uploadDir;
-        $adapter = new LocalFilesystemAdapter($fullPath);
-        $this->filesystem = new Filesystem($adapter);
-    }
+        // Caminho completo do arquivo
+        $destination = $uploadDir . $filename;
 
-    public function upload(string $filename, string $contents): void
-    {
-        // Gera subpastas com base no ano e mês
-        $subfolder = date('Y/m'); // exemplo: 2025/06
-        $path = $subfolder . '/' . $filename;
-
-        // Cria o arquivo no caminho com subpastas
-        $this->filesystem->write($path, $contents);
+        // Salva o conteúdo do arquivo
+        if (file_put_contents($destination, $contents) === false) {
+            throw new \RuntimeException("Erro ao salvar o arquivo.");
+        }
     }
 }
